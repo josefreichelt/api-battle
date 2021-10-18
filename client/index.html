@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./index.css" rel="stylesheet" />
-    <title>API Battle</title>
-</head>
-<body>
-    <div>
-        <div>
-            <label for="getuser">GET User by id</label>
-            <input id="getuser" placeholder="Id of user to search for" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="./index.css" rel="stylesheet" />
+        <title>API Battle</title>
+    </head>
+    <body>
+        <div class="layout">
+            <h1 id="main-title">API-BATTLE</h1>
+            <form id="getuser-form">
+                <label for="getuser">GET User by name or id: </label>
+                <input
+                    name="user-id"
+                    id="userid"
+                    placeholder="Id of user to search for"
+                />
+                <button type="submit">Submit</button>
+            </form>
+            <div id="gotten-user" />
+            <form id="create-user-form">
+                <label for="getuser">Create new user: </label>
+                <input name="user-name" placeholder="Name of a new user" />
+                <input name="user-score" placeholder="Score of a new user" />
+                <button type="submit">Submit</button>
+            </form>
         </div>
-    </div>
-    <script src="./index.js">
-    </script>
-</body>
+        <script src="./index.js"></script>
+    </body>
 </html>
