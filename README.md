@@ -4,33 +4,35 @@ A simple little fun project to test out new things.
 
 ## 🔑Key feature requirements
 - Connects to local SQlite database.
+- GET (/user/:id) finds and returns user from database
 - POST (/user) adds new user to database
-- GET (/user:id) finds and returns user from database
-- PUT (/user:id) finds user and updates its data
-- DELETE (/user:id) finds and deletes user from database
+  - user data sent as JSON in body
+- PUT (/user/:id) finds user and updates its data
+  - user data sent as JSON in body
+- DELETE (/user/:id) finds and deletes user from database
 - GET (/users) gets TOP 10 users with highest score
 - Websockets (/chat) a simple chat
 
 
 ### Node
-- [ ] Create user
 - [ ] Get user
+- [ ] Create user
 - [ ] Update user
 - [ ] Delete user
 - [ ] Get users
 - [ ] Websockets chat
 
 ### Go
-- [ ] Create user
 - [ ] Get user
+- [ ] Create user
 - [ ] Update user
 - [ ] Delete user
 - [ ] Get users
 - [ ] Websockets chat
 
 ### Rust
-- [ ] Create user
 - [ ] Get user
+- [ ] Create user
 - [ ] Update user
 - [ ] Delete user
 - [ ] Get users
