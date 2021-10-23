@@ -3,7 +3,7 @@ A battle between languages to see how easy/nice it is to write a simple rest api
 A simple little fun project to test out new things.
 
 ## 🔑Key feature requirements
-- Connects to local SQlite database.
+- Connects to local SQlite database. Base template database in database.db or database.sql.
 - GET (/user/:id) finds and returns user from database
 - POST (/user) adds new user to database
   - user data sent as JSON in body
