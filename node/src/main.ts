@@ -1,4 +1,5 @@
 import express from 'express';
+import './config/setup-database';
 
 const port = 1338;
 const App = express();
