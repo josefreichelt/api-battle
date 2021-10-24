@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"id"	INTEGER NOT NULL,
 	"username"	VARCHAR(50),
 	"score"	INTEGER,
+    UNIQUE ('username'),
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 INSERT INTO "users" ("id","username","score") VALUES (1,'lohanessian0',2740);

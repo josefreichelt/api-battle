@@ -1,22 +1,37 @@
 import express from 'express';
+import cors from 'cors';
 import './config/setup-database';
+import { userRouter } from './routers/user-router';
 
 const port = 1338;
 const App = express();
 
-App.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-App.post('/', (req, res) => {
-    res.send('Hello World!');
-});
+App.use(express.json());
+App.use(cors());
+
+App.use('/user', userRouter);
 App.put('/', (req, res) => {
-    res.send('Hello World!');
+    console.log('PUT');
+    console.log(req.query);
+    console.log(req.body);
+    res.send({
+        id: 1, username: 'put bob', score: 3
+    });
 });
 App.delete('/', (req, res) => {
-    res.send('Hello World!');
+    console.log('DELETE');
+    console.log(req.query);
+    console.log(req.body);
+    res.send({ msg: 'Bye bob!' });
 });
-
+App.get('/s', (req, res) => {
+    console.log('GET');
+    console.log(req.query);
+    console.log(req.body);
+    res.send({
+        id: 1, username: 'get bob', score: 3
+    });
+});
 
 App.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
