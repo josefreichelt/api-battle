@@ -1,20 +1,43 @@
 //Get user form
-// const getByIdButton = document.getElementById("getuser-button");
-// getByIdButton.addEventListener("click", (e) => {
-//   console.log(e.currentTarget);
-//   GET();
-// });
 const getUserForm = document.getElementById("getuser-form");
 getUserForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const userId = new FormData(e.target).get("user-id");
     const user = await getUser(userId);
-    if (user) {
-        document.getElementById("gotten-user").innerHTML = `
-        <span>${user.id}</span>
-        <span>${user.name}</span>
-        <span>${user.score}</span>
+    if (user && user.id && user.username && user.score) {
+        const userElement = document.createElement("div");
+        userElement.style.display = "flex";
+        userElement.style.flexDirection = "column";
+        userElement.style.marginBottom = "1rem";
+        userElement.innerHTML = `
+        <span>ID: ${user.id}</span>
+        <span>Username: ${user.username}</span>
+        <span>Score: ${user.score}</span>
         `;
+        const gotUserEl = document.getElementById("gotten-user");
+        console.log(gotUserEl.children[1]);
+        if (gotUserEl.children.length > 1) {
+            gotUserEl.removeChild(gotUserEl.children[1]);
+        }
+        gotUserEl.appendChild(userElement);
+        gotUserEl.style.display = "flex";
+        gotUserEl.style.flexDirection = "column";
+    } else {
+        const userElement = document.createElement("div");
+        userElement.style.display = "flex";
+        userElement.style.flexDirection = "column";
+        userElement.style.marginBottom = "1rem";
+        userElement.innerHTML = `
+        <span>Failed to get user</span>
+        `;
+        const gotUserEl = document.getElementById("gotten-user");
+        console.log(gotUserEl.children[1]);
+        if (gotUserEl.children.length > 1) {
+            gotUserEl.removeChild(gotUserEl.children[1]);
+        }
+        gotUserEl.appendChild(userElement);
+        gotUserEl.style.display = "flex";
+        gotUserEl.style.flexDirection = "column";
     }
 });
 //create user form
@@ -25,60 +48,94 @@ create.addEventListener("submit", (e) => {
     const username = formData.get("user-name");
     const userscore = formData.get("user-score");
     createUser({
-        name: username,
+        username: username,
         score: userscore,
     });
 });
 //update user form
+const updateForm = document.getElementById("update-user-form");
+updateForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const username = formData.get("user-name");
+    const userscore = formData.get("user-score");
+    updateUser({
+        name: username,
+        score: userscore,
+    });
+});
 //delete user form
+const deleteForm = document.getElementById("delete-user-form");
+deleteForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const username = formData.get("user-name");
+    deleteUser(username);
+});
+const usersForm = document.getElementById("get-users-form");
+usersForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    getUsers();
+});
 
+//
+//
 // API Handler
+//
+//
 
 const baseUrl = "http://localhost:1338";
+const userUrl = baseUrl + "/user";
 const commonHeader = {
-    mode: "no-cors",
+    mode: "cors",
+    headers: {
+        "content-type": "application/json",
+    },
 };
-async function getUser(id = -1) {
-    const response = await fetch(baseUrl + `?id=${id}`, {
+async function getUser(username = -1) {
+    const response = await fetch(userUrl + `?username=${username}`, {
         ...commonHeader,
     });
-    const json = await response.json();
-    return json;
+    if (response.ok) {
+        const json = await response.json();
+        return json;
+    }
+    return null;
 }
 
 async function getUsers() {
-    const response = await fetch(baseUrl + `s`, {
+    const response = await fetch(userUrl + `s`, {
         ...commonHeader,
+        method: "GET",
     });
     const json = await response.json();
     return json;
 }
 
 async function createUser(data = {}) {
-    const response = await fetch(baseUrl + url, {
+    const response = await fetch(userUrl, {
         ...commonHeader,
         method: "POST",
         body: JSON.stringify(data),
     });
-    const json = await response.json();
-    return json;
+    console.log(commonHeader);
+    console.log(data);
+    return response.ok;
 }
 
-async function updateUser(id = -1, data = {}) {
-    const response = await fetch(baseUrl + `?id=${id}`, {
+async function updateUser(data = {}) {
+    const response = await fetch(userUrl, {
         ...commonHeader,
         method: "PUT",
         body: JSON.stringify(data),
     });
-    const json = await response.json();
-    return json;
+    return response.ok;
 }
 
-async function deleteUser(id = -1) {
-    const response = await fetch(baseUrl + `?id=${id}`, {
+async function deleteUser(username = -1) {
+    const response = await fetch(userUrl + `?username=${username}`, {
         ...commonHeader,
         method: "DELETE",
     });
-    const json = await response.json();
-    return json;
+    return response.ok;
 }

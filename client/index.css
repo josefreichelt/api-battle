@@ -3,6 +3,10 @@ body {
     color: rgb(238, 238, 238);
 }
 
+h2 {
+    margin-top: 0;
+}
+
 .layout {
     margin: 0 auto;
     display: grid;
