@@ -60,7 +60,7 @@ updateForm.addEventListener("submit", (e) => {
     const username = formData.get("user-name");
     const userscore = formData.get("user-score");
     updateUser({
-        name: username,
+        username: username,
         score: userscore,
     });
 });
