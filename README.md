@@ -15,11 +15,11 @@ A simple little fun project to test out new things.
 
 
 ### Node
-- [ ] Get user
-- [ ] Create user
-- [ ] Update user
-- [ ] Delete user
-- [ ] Get users
+- [x] Get user
+- [x] Create user
+- [x] Update user
+- [x] Delete user
+- [x] Get users
 - [ ] Websockets chat
 
 ### Go

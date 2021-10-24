@@ -72,10 +72,31 @@ deleteForm.addEventListener("submit", (e) => {
     const username = formData.get("user-name");
     deleteUser(username);
 });
+
+//top users form
 const usersForm = document.getElementById("get-users-form");
-usersForm.addEventListener("submit", (e) => {
+usersForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    getUsers();
+    const users = await getUsers();
+    if (users) {
+        const table = document.getElementById("top-users-table");
+        const tableBody = document.getElementById("top-users-table-body");
+        while (tableBody.lastChild) {
+            tableBody.removeChild(tableBody.lastChild);
+        }
+        for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            const entry = document.createElement("tr");
+            entry.innerHTML = `
+                <td>${i + 1}</td>
+                <td>${user.id}</td>
+                <td>${user.username}</td>
+                <td>${user.score}</td>
+            `;
+            tableBody.append(entry);
+        }
+        table.style.display = "table";
+    }
 });
 
 //
@@ -108,8 +129,11 @@ async function getUsers() {
         ...commonHeader,
         method: "GET",
     });
-    const json = await response.json();
-    return json;
+    if (response.ok) {
+        const json = await response.json();
+        return json;
+    }
+    return null;
 }
 
 async function createUser(data = {}) {
