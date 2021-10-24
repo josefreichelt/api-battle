@@ -1,9 +1,9 @@
 import { db } from '../config/setup-database';
 
-/** Updates the user score in DB*/
-export async function putUserToDB(username:string, score:number){
+/** Deletes the user from DB either by username*/
+export async function deleteUserFromDB(username:string){
     return new Promise((resolve, reject)=>{
-        db.run(`UPDATE users SET "score"=${score} WHERE username="${username}";`, (err)=>{
+        db.run(`DELETE FROM users WHERE username="${username}";`, (err)=>{
             if (err){
                 reject(err);
             }

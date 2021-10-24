@@ -1,6 +1,6 @@
 import { db } from '../config/setup-database';
 
-/** Gets the user from DB either by username or id */
+/** Creates new user and inserts it to the DB*/
 export async function postUserToDB(username:string, score:number){
     return new Promise((resolve, reject)=>{
         db.run(`INSERT INTO users ("username", "score") VALUES("${username}", ${score});`, (err)=>{

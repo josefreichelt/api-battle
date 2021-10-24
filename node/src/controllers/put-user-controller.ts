@@ -20,7 +20,7 @@ export async function putUserController(req:Request, res:Response){
         if (result){
             res.statusCode = 200;
             res.statusMessage = 'User updated';
-            res.send(result);
+            res.send();
         } else {
             res.statusCode = 404;
             res.statusMessage = 'User not updated';

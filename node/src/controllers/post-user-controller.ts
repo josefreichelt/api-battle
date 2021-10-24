@@ -20,7 +20,7 @@ export async function postUserController(req:Request, res:Response){
         if (result){
             res.statusCode = 200;
             res.statusMessage = 'User created';
-            res.send(result);
+            res.send();
         } else {
             res.statusCode = 404;
             res.statusMessage = 'User not created';
