@@ -10,14 +10,7 @@ App.use(express.json());
 App.use(cors());
 
 App.use('/user', userRouter);
-App.put('/', (req, res) => {
-    console.log('PUT');
-    console.log(req.query);
-    console.log(req.body);
-    res.send({
-        id: 1, username: 'put bob', score: 3
-    });
-});
+
 App.delete('/', (req, res) => {
     console.log('DELETE');
     console.log(req.query);
