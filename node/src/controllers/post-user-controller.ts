@@ -3,10 +3,6 @@ import { postUserToDB } from '../models/post-user-model';
 
 export async function postUserController(req:Request, res:Response){
     const { username, score } = req.body;
-    console.log('POSTY');
-    console.log(req.body);
-    console.log(username);
-    console.log(score);
     if (!username || !score){
         res.statusCode = 400;
         if (!username){
@@ -23,16 +19,18 @@ export async function postUserController(req:Request, res:Response){
         const result = await postUserToDB(username.toString(), parseInt(score.toString(), 10));
         if (result){
             res.statusCode = 200;
-            res.statusMessage = 'User found';
+            res.statusMessage = 'User created';
             res.send(result);
         } else {
             res.statusCode = 404;
-            res.statusMessage = 'User not found';
+            res.statusMessage = 'User not created';
             res.send();
         }
     } catch (e){
-        console.error('🛑 Error processing GET User request');
+        console.error('🛑 Error processing POST User request');
         console.error(e);
+        res.statusCode = 500;
+        res.send();
     }
 
 }

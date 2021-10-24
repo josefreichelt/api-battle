@@ -1,5 +1,4 @@
 import { db } from '../config/setup-database';
-import { User } from '../types';
 
 /** Gets the user from DB either by username or id */
 export async function postUserToDB(username:string, score:number){
