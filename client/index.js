@@ -15,7 +15,6 @@ getUserForm.addEventListener("submit", async (e) => {
         <span>Score: ${user.score}</span>
         `;
         const gotUserEl = document.getElementById("gotten-user");
-        console.log(gotUserEl.children[1]);
         if (gotUserEl.children.length > 1) {
             gotUserEl.removeChild(gotUserEl.children[1]);
         }
@@ -31,7 +30,6 @@ getUserForm.addEventListener("submit", async (e) => {
         <span>Failed to get user</span>
         `;
         const gotUserEl = document.getElementById("gotten-user");
-        console.log(gotUserEl.children[1]);
         if (gotUserEl.children.length > 1) {
             gotUserEl.removeChild(gotUserEl.children[1]);
         }
@@ -142,8 +140,6 @@ async function createUser(data = {}) {
         method: "POST",
         body: JSON.stringify(data),
     });
-    console.log(commonHeader);
-    console.log(data);
     return response.ok;
 }
 
@@ -163,3 +159,41 @@ async function deleteUser(username = -1) {
     });
     return response.ok;
 }
+
+/**
+ * WEBSOCKETS
+ */
+
+const websocket = new WebSocket("ws://localhost:1338");
+websocket.onopen = (e) => {
+    console.log("Connected");
+};
+websocket.onmessage = (ev) => {
+    const { username, message } = JSON.parse(ev.data);
+    if (!username || !message) return;
+    const chatlog = document.getElementById("chat-messages");
+    const messageEl = document.createElement("div");
+    messageEl.innerHTML = `
+    <span><b>${username}:&nbsp;</b></span>
+    <span>${message}</span>
+    `;
+    chatlog.appendChild(messageEl);
+    chatlog.scroll({
+        behavior: 'smooth',
+        top: chatlog.scrollHeight
+    })
+};
+
+const chatform = document.getElementById("chat-controls");
+chatform.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const username = formData.get("username");
+    const message = formData.get("message");
+    websocket.send(
+        JSON.stringify({
+            username,
+            message,
+        })
+    );
+});
