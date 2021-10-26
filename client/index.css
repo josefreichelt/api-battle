@@ -50,7 +50,9 @@ h2 {
 
 #chat-messages {
     flex-grow: 1;
+    color: rgb(22, 22, 22);
     overflow: auto;
+    padding: 1rem;
     scroll-behavior: smooth;
 }
 

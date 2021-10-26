@@ -165,23 +165,25 @@ async function deleteUser(username = -1) {
  */
 
 const websocket = new WebSocket("ws://localhost:1338");
-websocket.onopen = (e) => {
+websocket.onopen = () => {
     console.log("Connected");
 };
+
 websocket.onmessage = (ev) => {
-    const { username, message } = JSON.parse(ev.data);
-    if (!username || !message) return;
+    const { username, message, date } = JSON.parse(ev.data);
+    if (!username || !message || !date) return;
     const chatlog = document.getElementById("chat-messages");
     const messageEl = document.createElement("div");
     messageEl.innerHTML = `
+    <span>${date}: </span>
     <span><b>${username}:&nbsp;</b></span>
     <span>${message}</span>
     `;
     chatlog.appendChild(messageEl);
     chatlog.scroll({
-        behavior: 'smooth',
-        top: chatlog.scrollHeight
-    })
+        behavior: "smooth",
+        top: chatlog.scrollHeight,
+    });
 };
 
 const chatform = document.getElementById("chat-controls");
@@ -196,4 +198,6 @@ chatform.addEventListener("submit", (e) => {
             message,
         })
     );
+    const msgInput = chatform.querySelector('input[name="message"]');
+    msgInput.value = "";
 });
