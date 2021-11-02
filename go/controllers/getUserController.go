@@ -19,7 +19,7 @@ func GetUser(c *gin.Context) {
 			c.JSON(200, gottenUser)
 		}
 	} else {
-		fmt.Println("🛑 Bad request, missing username")
+		fmt.Println("🛑 Bad request in get user, missing username")
 		c.Status(http.StatusBadRequest)
 	}
 }

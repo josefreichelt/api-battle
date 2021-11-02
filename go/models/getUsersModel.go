@@ -13,12 +13,14 @@ func GetUsersFromDB() ([]*utils.User, error) {
 	db, err := sql.Open("sqlite3", "../database.db")
 	if err != nil {
 		fmt.Println("🛑 Error openning database")
+		fmt.Println(err)
 		return users, err
 	}
 
 	rows, err := db.Query("SELECT * FROM users ORDER BY \"score\" DESC LIMIT 10;")
 	if err != nil {
 		fmt.Println("🛑 Error executing query")
+		fmt.Println(err)
 		return users, err
 	}
 
@@ -27,6 +29,7 @@ func GetUsersFromDB() ([]*utils.User, error) {
 		err := rows.Scan(&user.Id, &user.Username, &user.Score)
 		if err != nil {
 			fmt.Println("🛑 Error scanning rows")
+			fmt.Println(err)
 		} else {
 			users = append(users, user)
 		}

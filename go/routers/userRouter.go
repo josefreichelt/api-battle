@@ -10,4 +10,5 @@ const baseRoute = "/user"
 
 func SetupUserRoutes(router *gin.Engine) {
 	router.GET(baseRoute, controllers.GetUser)
+	router.POST(baseRoute,controllers.PostUser)
 }

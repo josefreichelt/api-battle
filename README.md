@@ -24,7 +24,7 @@ A simple little fun project to test out new things.
 
 ### Go
 - [x] Get user
-- [ ] Create user
+- [x] Create user
 - [ ] Update user
 - [ ] Delete user
 - [x] Get users
