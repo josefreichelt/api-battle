@@ -3,30 +3,38 @@ package models
 import (
 	"api-battle/utils"
 	"database/sql"
+	"fmt"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func GetUserFromDB(username string) (user utils.User, err error) {
 	db, err := sql.Open("sqlite3", "../database.db")
-	utils.CheckErr(err)
+	var newUser = new(utils.User)
 
+	if err != nil {
+		fmt.Println("🛑 Error openning database")
+		return *newUser, err
+	}
 	stmt, err := db.Prepare("SELECT * FROM users WHERE id=? OR username=?;")
-	utils.CheckErr(err)
+	if err != nil {
+		fmt.Println("🛑 Error preparing query")
+		return *newUser, err
+	}
 
 	res, err := stmt.Query(username, username)
-	utils.CheckErr(err)
+	if err != nil {
+		fmt.Println("🛑 Error executing query")
+		return *newUser, err
+	}
 	res.Next()
 
-	var id uint
-	var name string
-	var score int
-
-	err = res.Scan(&id, &name, &score)
-	utils.CheckErr(err)
-	gottenUser := utils.User{Id: id, Username: name, Score: score}
-
+	err = res.Scan(&newUser.Id, &newUser.Username, &newUser.Score)
+	if err != nil {
+		fmt.Println("🛑 Error scanning rows")
+		return *newUser, err
+	}
 	res.Close()
 	db.Close()
-	return gottenUser, err
+	return *newUser, err
 }

@@ -1,7 +1,7 @@
 package utils
 
 type User struct {
-	Id       uint
-	Username string
-	Score    int
+	Id       uint `json:"id"`
+	Username string `json:"username"`
+	Score    int `json:"score"`
 }
