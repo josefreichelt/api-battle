@@ -1,8 +1,8 @@
 package main
 
 import (
+	"api-battle/controllers"
 	"api-battle/routers"
-
 	"fmt"
 
 	"github.com/gin-contrib/cors"
@@ -18,6 +18,7 @@ func main() {
 		ExposeHeaders: []string{"content-type"},
 	}))
 	routers.SetupUserRoutes(router)
+	router.GET("/users", controllers.GetUsers)
 	fmt.Println("Hello there!")
 	router.Run("localhost:1338")
 }
