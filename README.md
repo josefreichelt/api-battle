@@ -25,7 +25,7 @@ A simple little fun project to test out new things.
 ### Go
 - [x] Get user
 - [x] Create user
-- [ ] Update user
+- [x] Update user
 - [ ] Delete user
 - [x] Get users
 - [ ] Websockets chat
