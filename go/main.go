@@ -10,11 +10,12 @@ import (
 )
 
 func main() {
-	router := gin.Default()
+	router := gin.New()
 	router.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"*"},
-		AllowMethods: []string{"PUT", "GET", "POST", "DELETE"},
-		AllowHeaders: []string{"Origin"},
+		AllowOrigins:  []string{"*"},
+		AllowMethods:  []string{"PUT", "GET", "POST", "DELETE"},
+		AllowHeaders:  []string{"Origin", "content-type"},
+		ExposeHeaders: []string{"content-type"},
 	}))
 	routers.SetupUserRoutes(router)
 	fmt.Println("Hello there!")

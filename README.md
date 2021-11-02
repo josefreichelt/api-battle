@@ -23,7 +23,7 @@ A simple little fun project to test out new things.
 - [x] Websockets chat
 
 ### Go
-- [ ] Get user
+- [x] Get user
 - [ ] Create user
 - [ ] Update user
 - [ ] Delete user
