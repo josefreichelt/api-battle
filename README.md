@@ -28,7 +28,7 @@ A simple little fun project to test out new things.
 - [x] Update user
 - [x] Delete user
 - [x] Get users
-- [ ] Websockets chat
+- [x] Websockets chat (Partial support)
 
 ### Rust
 - [ ] Get user

@@ -19,6 +19,7 @@ func main() {
 	}))
 	routers.SetupUserRoutes(router)
 	router.GET("/users", controllers.GetUsers)
+	router.GET("/", controllers.WebsocketsUpgrader)
 	fmt.Println("Hello there!")
 	router.Run("localhost:1338")
 }
