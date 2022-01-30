@@ -25,6 +25,7 @@ func WebsocketsUpgrader(c *gin.Context) {
 		fmt.Println(err)
 	}
 	defer ws.Close()
+
 	var welcomeMsg = WSMessage{Username: "server", Message: "Welcome to api-battle chat", Date: time.Now().Format("15:04")}
 	ws.WriteJSON(welcomeMsg)
 }
